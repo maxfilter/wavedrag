@@ -1,0 +1,9 @@
+services:
+  dev:
+    image: wavedrag:latest
+    ports:
+      - 8888:8888
+    volumes:
+      - ~/git/wavedrag:/app/wavedrag
+    stdin_open: true 
+    tty: true
