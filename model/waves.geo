@@ -1,9 +1,12 @@
-lc = 80.; // mesh spacing
+A = 100.; // amplitude
+F = 4; // frequency
+
+lc = 80./F; // mesh spacing
+lcBed = lc/4; // mesh spacing bed
+nPointsBed = 20*F; // number of points used to resolve bed
+
 X = 3000.; // flow line length
 H = 400.; // ice thickness
-A = 100.; // amplitude
-F = 3; // frequency
-nPointsBed = 50; // number of points used to resolve bed
 
 // define glacier extent
 Point(1) = {X, 0., 0., lc};
@@ -19,9 +22,9 @@ Line(13) = {3, 4};
 bedPoints[0] = 4;
 For i In {1 : nPointsBed}
     xi = i/(nPointsBed + 1)*X;
-    yi = A*Sin(F*2*Pi/X*xi);
+    yi = -A*Sin(F*2*Pi/X*xi);
     bedPoints[i] = newp;
-    Point(bedPoints[i]) = {xi, yi, 0., lc};
+    Point(bedPoints[i]) = {xi, yi, 0., lcBed};
 EndFor
 bedPoints[nPointsBed + 1] = 1;
 Spline(14) = bedPoints[];

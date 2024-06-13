@@ -53,7 +53,7 @@ def removexticks():
 def surfaceplot(mesh, u, filename):
     import numpy as np
     import matplotlib.pyplot as plt
-    from momentummodel import secpera, dayspera
+    from wavedrag.momentummodel import secpera, dayspera
     from domain import bdryids
 
     xs, _ = getxsurface(mesh, bdryids['top'])
