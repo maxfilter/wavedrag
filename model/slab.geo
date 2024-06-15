@@ -1,3 +1,4 @@
+
 A = 10.0;F = 0.0;X = 20000.0;H = 400.0;
 lc = 20.; // mesh spacing
 lcBed = lc/4; // mesh spacing bed

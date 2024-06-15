@@ -52,6 +52,7 @@ petsc4py.init(passthroughoptions)
 from firedrake import *
 from firedrake.output import VTKFile
 from firedrake.petsc import PETSc
+import firedrake as fd
 
 import numpy as np
 from domain import bdryids
@@ -99,11 +100,22 @@ assert (mesh.comm.size == 1 or len(args.osurface) == 0)
 mm = MomentumModel(eps=args.eps, alpha=args.alpha,
                    Dtyp_pera=args.Dtyp, Hin=args.Hin, Hout=args.Hout)
 
+def velocity_transect(model, mesh):
+    R = fd.FunctionSpace(mesh, 'R', 0)
+    one = fd.Function(R).assign(1.0)
+    x, _ = fd.SpatialCoordinate(mesh)
+    x_min, x_max = 750*2, 750*3
+    chi_s = fd.conditional(x < x_max, fd.conditional(x > x_min, one, 0), 0) 
+    area_sub = fd.assemble(chi_s * fd.dx)
+    vel_subsection = fd.assemble(fd.sqrt(fd.dot(mm.u, mm.u)) * chi_s * fd.dx) / area_sub
+    print(vel_subsection*secpera)
+
 # solver mode: momentum-only solve of Stokes problem
 def momentumsolve(package=args.package, upold = None, upcoarse = None, indent=0):
     up = mm.solve(mesh, bdryids,
                   package=package, upold=upold, upcoarse=upcoarse)
     umagav,umagmax,pav,pmax = mm.solutionstats(mesh)
+    velocity_transect(mm, mesh)
     printpar('flow speed: av = %10.3f m a-1,  max = %10.3f m a-1' \
              % (secpera*umagav,secpera*umagmax),
              indent=indent+1)
