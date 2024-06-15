@@ -54,7 +54,7 @@ from firedrake.output import VTKFile
 from firedrake.petsc import PETSc
 
 import numpy as np
-from wavedrag.domain import bdryids
+from domain import bdryids
 from wavedrag.momentummodel import secpera, dayspera, MomentumModel
 from wavedrag.surfaceutils import surfaceplot
 

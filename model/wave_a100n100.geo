@@ -1,4 +1,4 @@
-
+A = 100.0;F = 100.0;X = 20000.0;H = 400.0;
 lc = 20.; // mesh spacing
 lcBed = lc/4; // mesh spacing bed
 nPointsBed = 20*F; // number of points used to resolve bed

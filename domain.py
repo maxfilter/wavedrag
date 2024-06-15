@@ -14,6 +14,11 @@
 #   In [1]: from firedrake import *
 #   In [2]: Mesh('glacier.msh')
 
+bdryids = {'outflow' : 41,
+           'top'     : 42,
+           'inflow'  : 43,
+           'base'    : 44}
+
 def writegeo(geo_filename, param_name, param_val, outputfilename):
 
     #write parameters into the geofile

@@ -54,13 +54,15 @@ def surfaceplot(mesh, u, filename):
     import numpy as np
     import matplotlib.pyplot as plt
     from wavedrag.momentummodel import secpera, dayspera
-    from domain import bdryids
+    from wavedrag.domain import bdryids
 
     xs, _ = getxsurface(mesh, bdryids['top'])
     L = max(xs)
     x = np.linspace(0.0,L,401)
     sfcn = getboundaryelevation(mesh, bdryids['top'])
     ufcn, wfcn = getsurfacevelocityfunction(mesh, bdryids['top'], u)
+    #print(ufcn)
+    #print(wfcn)
     plt.figure(figsize=(6.0,8.0))
     rows = 2
     print('plotting surface values of (u,w) in image file %s ...' % filename)

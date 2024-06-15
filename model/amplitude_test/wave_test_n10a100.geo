@@ -1,12 +1,7 @@
-A = 100.; // amplitude
-F = 4; // frequency
-
-lc = 80./F; // mesh spacing
+A = 100.0;F = 10.0;X = 60000.0;H = 400.0;
+lc = 80.; // mesh spacing
 lcBed = lc/4; // mesh spacing bed
 nPointsBed = 20*F; // number of points used to resolve bed
-
-X = 3000.; // flow line length
-H = 400.; // ice thickness
 
 // define glacier extent
 Point(1) = {X, 0., 0., lc};

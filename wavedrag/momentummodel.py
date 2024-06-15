@@ -64,6 +64,8 @@ class MomentumModel(OptionsManager):
         uin = fd.as_vector([C * (self.Hin**(self.n_glen+1.0) \
                                 - (self.Hin - z)**(self.n_glen+1.0)),
                             0.0])
+        uin = fd.as_vector([0.0,0.0])
+        print(uin)
         return uin
 
     def create_mixed_space(self, mesh):
